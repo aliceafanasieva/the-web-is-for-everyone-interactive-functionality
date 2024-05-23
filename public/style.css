@@ -3,12 +3,11 @@
   --body-color: rgb(255, 255, 255);
   --primary-color: rgb(255, 255, 255);
   --secondary-color: rgb(255, 0, 0);
-  --border-property: rgb(0, 0, 0) solid 1px;
   --text-color: rgb(0, 0, 0);
 
 }
 
-/* basis styling */
+/* - - - Basic styling - - - */
 
 * {
   box-sizing: border-box;
@@ -21,14 +20,19 @@ body {
   min-height: 100vh;
   background-color: var(--body-color);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 main {
-  padding: 2em 0 2em 0;
+  padding-top: 2rem;
 }
 
 h1 {
   font-size: 35px;
+}
+
+h2 {
+  font-size: 30px;
 }
 
 h3 {
@@ -49,168 +53,102 @@ p {
   font-weight: 400;
 }
 
-a {
-  position: fixed;
-  top: 20px; 
-  right: 1px; 
-  z-index: 999; /* Om het boven andere elementen te zetten */
-}
+/* - - - Navigation bar head - - - */
 
-/* index.ejs */
-
-.index {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.index .container {
-  text-align: center;
-}
-
-.index section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  margin-bottom: 2em;
-  justify-content: center;
-  text-align: center;
-}
-
-.index section img {
-  width: 170px;
-  height: 170px;
-  object-fit: cover;
-}
-
-.index section .cross {
-  width: 170px;
-  height: 170px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.index section .cross img {
-  width: 100px;
-  height: 100px;
-}
-
-/* Hover effect */
-
-.index section:hover img, .index section:hover h3 {
-  transform: scale(1.1);
-  transition: 0.3s ease;
-}
-
-.index section:hover ~ .container {
-  margin-top: 0; 
-}
-
-.index section:hover ~ h1 {
-  margin-top: -40px; 
-}
-
-.member_name {
-  text-transform: capitalize;
-}
-
-
-@media (min-width: 45em) {
-  .index{
-    position: fixed;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .index .container {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Three columns in the first row */
-    grid-template-rows: repeat(2, auto); /* Two rows with automatic height */
-    gap: 1em; /* Adjust the gap between items */
-    padding-top: 2em;
-    border-top: 1px solid black;
-  }
-
-  .index section img {
-    width: 235px;
-    height: 235px;
-  }
-
-  .index section .cross {
-    width: 235px;
-    height: 235px;
-  }
-
-  .index section .cross img{
-    width: 120px;
-    height: 120px;
-  }
-  
-  h1 {
-    margin-bottom: -0.2em;
-    font-size: 45px;
-  }
-
-  h3 {
-    margin-top: 1em;
-  }
-}
-
-
-@media (min-width: 70em) {
-
-  .index .container {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 1em;
-  }
-}
-
-/* Navigation bar head */
-
-header {
+nav {
   position: sticky;
+  background-color: var(--primary-color);
+  z-index: 1000;
   top: 0;
+}
+
+nav ul {
+  transition: ease 0.40s;
+  list-style: none;
+}
+
+nav .horbar {
   width: 100%;
+  height: 100px;
+  top: 0;
+  padding: 20px 5% 15px;
+  position: sticky;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 5% 15px;
-  overflow: hidden;
+  justify-content: space-around;
   background-color: var(--primary-color);
-  transition: ease .40s;
-  border-bottom: 1.5px solid var(--clr-border);
-  z-index: 10000;
+  border-bottom: rgb(255, 0, 0) solid 1.2px;
 }
 
-.navbar nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-.bx{
-  background: transparent;
+nav .nav_option {
+  position: relative;
+  height: 100%;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
   color: var(--secondary-color);
-  font-size: 23px;
+  text-transform: uppercase;
+}
+
+nav .nav_option::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+nav .nav_option:hover::after {
+  width: 100%;
+}
+
+.sidebar {
+  border-right: rgb(255, 0, 0) solid 1.2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  z-index: -10;
+  background-color: rgba(255, 255, 255, 0.417);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 120px 5% 15px;
+  display: none;
+}
+
+.sidebar a {
+  padding-top: 30px;
+  margin-left: 10px;
+}
+
+
+
+/* - - - Icons - - - */
+
+.bx {
   margin: 0 1em 0 0;
 } 
 
-/* Search form */
+#menu-icon {
+  font-size: 35px;
+  cursor: pointer;
+}
+
+#x-icon {
+  font-size: 40px;
+  display: none;
+  cursor: pointer;
+}
+
+/* - - - Search form - - - */
 
 .search-form {
   margin-left: auto;
@@ -231,70 +169,396 @@ header {
   cursor: pointer;
 }
 
-/* overview.ejs */
 
-.overview section {
-  height: 33em;
+/* - - - Index.ejs - - - */
+
+.index {
   width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.overview article {
+  height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.overview article p {
-  width: 35em;
-  line-height: 2;
-}
-
-.welkom {
-  padding: 3em;
-
-}
-
-.welkom h1 {
-  text-transform: none;
-}
-
-.overview ul {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  align-items: center;
+  padding-top: 4rem;
 }
 
-.overview ul li {
-  margin: 0 10px;
+.index h1 {
+  border-bottom: 1px solid black;
+}
+
+.container_family {
+  padding-top: 2rem;
   text-align: center;
 }
 
-.overview ul li h3 {
-  margin: 10px 0;
+.index section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 2em;
+  justify-content: center;
+  text-align: center;
 }
 
-.overview ul li img {
-  width: 170px;
+.index section img {
+  width: 210px;
+  height: auto;
   object-fit: cover;
 }
 
-@media (min-width: 80em) {
-  .overview article {
+.index section .cross {
+  width: 210px;
+  height: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.index section .cross img {
+  width: 100px;
+  height: 100px;
+}
+
+
+/* - - - Hover effect - - - */
+
+.index section:hover img, .index section:hover h3 {
+  transform: scale(1.1);
+  transition: 0.3s ease;
+}
+
+.index section:hover ~ .container {
+  margin-top: 0; 
+}
+
+.index section:hover ~ h1 {
+  margin-top: -40px; 
+}
+
+.member_name {
+  text-transform: capitalize;
+}
+
+
+/* - - - index.ejs Media Queries - - - */ 
+
+@media (min-width: 45em) {
+  .index{
     display: flex;
-    gap: 2em;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
-  .overview ul {
-    overflow: auto;
-    height: 36vh;
+  .container_family {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto); 
+    gap: 1em; 
+    padding-top: 2em;
+    border-top: 1px solid black;
+  }
+
+  .index section img {
+    width: 235px;
+    height: 235px;
+  }
+
+  .index section .cross {
+    width: 235px;
+    height: 235px;
+  }
+
+  .index section .cross img{
+    width: 120px;
+    height: 120px;
+  }
+  
+  .index h1 {
+    margin-bottom: -0.2em;
+    font-size: 45px;
+    border: none;
+  }
+
+  .index h3 {
+    margin-top: 1em;
   }
 }
 
-/* detail.ejs */
+
+@media (min-width: 70em) {
+
+  .container_family {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 1em;
+  }
+}
+
+
+/* - - - Overview.ejs - - - */
+
+.main-overview {
+  display: flex;
+  flex-direction: column;
+} 
+
+.welkom-message-template {
+  padding: 2rem 2rem 4rem 2rem;
+}
+
+.welkom-message-template p {
+  width: 100%;
+  max-width: 35em;
+  line-height: 2;
+  margin-top: 1rem;
+}
+
+.welkom-message-template p, 
+.welkom-message-template h1 {
+  color: red;
+  text-transform: none;
+}
+
+.welkom-message-template h1 {
+  font-size: 30px;
+}
+
+.title-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+
+}
+
+.title-container, 
+.title-container h2 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.title-container h2 {
+    padding: 0.3em 1em;
+    margin: 0;
+    font-size: 25px;
+}
+
+.title-container:nth-child(2) h2 {
+  text-align: left; 
+}
+
+.title-container:nth-child(3) h2 {
+  margin-left: auto; 
+}
+
+.title-container:nth-child(5) h2{
+  margin: auto; 
+}
+
+
+/* - - - Carousel - - - */ 
+
+.wrapper {
+  flex-direction: column;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 2em 0em;
+}
+
+.carousel {
+  overflow-x: auto;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel.dragging {
+  cursor: grab;
+  scroll-behavior: auto;
+}
+
+.carousel.dragging .carousel_item {
+  pointer-events: none;   /* geen default meeslepen van het plaatje */
+}
+
+/* - - - Items van Carousel - - - */ 
+
+.carousel_item {
+  width: 200px;
+  object-fit: cover;
+  list-style: none;
+  display: inline-block;
+  margin-right: 8em;
+  cursor: pointer;
+}
+
+.carousel_item:first-child {
+  margin-left: 1.5em;
+}
+
+.carousel_item:last-child {
+  margin-right: 1.5em;
+}
+
+.carousel_item img {
+  width: 180px;
+  object-fit: cover;
+}
+
+.carousel_item h3 {
+  margin: 10px 0;
+  white-space: wrap;
+}
+
+/* - - - Pijltjes carousel draaien - - - */ 
+
+.icon-arrow {
+  width: 25px; 
+  height: 25px; 
+  top: 40%;
+  transform: translateY(-50%);
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+.icon-arrow-left {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath d='m17.267,23.888L6.439,13.061c-.283-.283-.439-.66-.439-1.061s.156-.777.439-1.061L17.267.112l.707.707L7.146,11.646c-.094.095-.146.22-.146.354s.052.259.146.354l10.827,10.827-.707.707Z'/%3E%3C/svg%3E");
+  left: 3em;
+}
+
+.icon-arrow-right {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath d='m6.733,23.888l-.707-.707,10.827-10.827c.095-.095.146-.22.146-.354s-.052-.259-.146-.354L6.026.819l.707-.707,10.827,10.827c.283.283.439.66.439,1.061s-.156.777-.439,1.061l-10.827,10.827Z'/%3E%3C/svg%3E");
+  right: 3em;
+}
+
+/* - - - Buttons stijlen - - - */
+
+.see-more-button {
+  width: 140px;
+  height: 36px;
+  font-size: 14px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 2em 2em 0em 0em;
+  align-self: end;
+  transition: transform 0.2s ease; 
+}
+
+.center-button:hover {
+  transform: scale(0.95);
+}
+
+/* - - - Overzicht.ejs Media Queries - - - */ 
+
+@media (min-width: 45em) {
+
+  .welkom-message-template {
+    padding: 4rem 4rem 5rem 4rem
+  }
+
+  .welkom-message-template h1 {
+    font-size: 45px;
+  }
+
+  .welkom-message-template p {
+    width: 100%;
+    max-width: 35em;
+    line-height: 2;
+    margin-top: 2rem;
+  }
+
+  .title-container h2 {
+    padding: 0.3em 2em;
+    font-size: 30px;
+  }
+
+  .wrapper {
+    padding: 4rem 4rem 1.5rem 4rem;
+  }
+
+  .icon-arrow {
+    width: 40px; 
+    height: 40px; 
+    margin: 3rem;
+  }
+
+  .carousel_item:first-child {
+    margin-left: 0;
+  }
+
+  .carousel_item:last-child {
+    margin-right: 0; /* Ik gebruik pseudo-class :last child om margin-right te verwijderen van laatste item */
+  }
+
+  .carousel_item {
+    width: calc(100%/2);
+    margin-right: 5rem;
+  }
+
+  .see-more-button {
+    width: 146px;
+    height: 39px;
+    font-size: 15px;
+    margin: 4em 2em 0em 0em
+  }
+
+  
+  
+}
+
+@media (min-width: 75em) {
+
+  .welkom-message-template {
+    padding: 8rem;
+  }
+
+  .welkom-message-template p {
+    width: 100%;
+    max-width: 35em;
+    line-height: 2;
+    margin-top: 2rem;
+    font-size: 18px;
+  }
+
+  .title-container h2 {
+    padding: 0.3em 3em;
+    font-size: 35px;
+  }
+
+  .carousel_item {
+    width: calc(100%/3);
+    margin-right: 7rem;
+  }
+
+  .see-more-button {
+    align-self: center;
+  }
+
+}
+
+/* - - - Detail.ejs - - - */
 
 .detail {
   font-family: Arial, Helvetica, sans-serif;
@@ -328,6 +592,8 @@ header {
   font-weight: normal;
 }
 
+
+/* - - - Detail.ejs Media Queries - - - */ 
 
 @media (min-width: 45em) {
   .detail {
