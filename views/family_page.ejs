@@ -1,4 +1,4 @@
-<%- include('./partials/head_ov_dt') %>
+<%- include('./partials/head') %>
 
 <main class="index">
   <h1>Mijn familie</h1>
@@ -19,7 +19,7 @@
           <% if (profile.id === member) { %>
 
             <!-- een onclick aantoep voor functie redirectOverview -->
-            <section onclick="window.location.href = '/personal_page'">
+            <section onclick="window.location.href = '/profile_page'">
               <img src="https://fdnd-agency.directus.app/assets/<%= profile.avatar %>">
               <h3 class="member_name"><%= profile.name %></h3> 
             </section>
@@ -38,7 +38,7 @@
 <!-- Functie om user door te sturen naar overview pagina-->
 <script>
   function redirectOverview() {
-    window.location.href = '/personal_page';
+    window.location.href = '/profile_page';
   }
 </script>
 

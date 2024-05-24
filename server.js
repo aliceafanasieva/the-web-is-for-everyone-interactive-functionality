@@ -25,12 +25,16 @@ app.use(express.static('public'))
 
 // - - - - - - - Routing - - - - - - - -
 
-// - - - GET Route voor login pagina - - -
+
+// - - - - GET Route voor login pagina - - - - 
+
 app.get('/', function(request, response) {
   response.render('login');
 });
 
-// - - - POST-route voor het afhandelen van het indienen van inlogformulier - - -
+
+// - - - - POST-route voor het afhandelen van het indienen van inlogformulier - - - -
+
 app.post('/login', async function(request, response) {
   const username = request.body.username;
   try {
@@ -53,9 +57,10 @@ app.post('/login', async function(request, response) {
 });
 
 
-// - - - GET Route for profile page - - -
+// - - - - GET Route voor profile page - - - -
+
 app.get('/profile/:id', async function(request, response) {
-  /* Functie request.params.id geeft de waarde van id terug. 
+  /* Functie request.params.id geeft de waarde van id terug (bijv. 2)
    Het maakt een URL met een filterqueryparameter om alleen  
    data van item met de specifieke ID op te halen. */
   const userId = request.params.id;
@@ -64,9 +69,9 @@ app.get('/profile/:id', async function(request, response) {
     const user = profileResponse.data[0];
 
     if (user) {
-      console.log("user info", user);
       response.render('profile_page', {
-        user: user
+        user: user,
+        userId: userId // Передаем userId
       });
     } else {
       response.status(404).send('User not found');
@@ -77,15 +82,14 @@ app.get('/profile/:id', async function(request, response) {
   }
 });
 
-// - - - GET route voor de overview (persoonelijke overzichtspagina) - - -
-app.get('/personal_page', async function(request, response) {
-  try {
-    const items = await fetchJson(apiItem);
-    const profiles = await fetchJson(apiProfile);
 
-    response.render('personal_page', {
-      data: items.data,
-      profiles: profiles.data,
+// - - - - GET route voor HEAD - - - -
+
+app.get('/partials/head/:id', async function(request, response) {
+  const userId = request.params.id;
+  try {
+    response.render('head', {
+      userId: userId
     });
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -93,28 +97,48 @@ app.get('/personal_page', async function(request, response) {
   }
 });
 
-// - - - Get Route voor details pagina (gedetaileerde informatie over objecten uit de bibliotheek) - - -
+
+// - - - - GET route voor personal page (persoonelijke overzichtspagina) - - - -
+
+app.get('/personal_page/:id', async function(request, response) {
+  const userId = request.params.id;
+  /* Ik geef informatie over user met specifieke id door
+  om personal page aan te passen (bijvoorbeeld de naam van user
+  in de welkom bericht). */
+  const profileResponse = await fetchJson(`${apiProfile}?filter={"id":${userId}}`);
+  const user = profileResponse.data[0];
+  try {
+    const items = await fetchJson(apiItem);
+
+    response.render('personal_page', {
+      data: items.data,
+      user: user,
+      userId: userId 
+    });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    response.status(500).send('Internal Server Error');
+  }
+});
+
+
+// - - - - GET route voor detail pagina (informatie over objecten uit de bibl.) - - - -
 
 // Het :id is routeparameter in URL, die aangeeft dat het eindpunt 
 // een id-parameter in de URL verwacht.
 app.get('/detail/:id', function(request, response){
-  console.log("Request: ", request.params.id)
   // Functie request.params.id geeft de waarde van id terug. 
   // Het maakt een URL met een filterqueryparameter om alleen  
   // data van item met de specifieke ID op te halen.
   // Fetch data uit API gebasseerd op id parameter :
   fetchJson(apiItem + '?filter={"id":' + request.params.id + '}')
     .then((items) => {
-      console.log("API response data:", items.data)
-
       // Preprocess data door onnodige <h2> en <strong> tags uit de description te verwijderen
       items.data.forEach(item => {
         if (item.description) {
           item.description = item.description.replace(/<\/?h2[^>]*>/g, '').replace('Samenvatting', '');;
         }
       });
-      console.log("API response data:", items.data)
-
       // Render 'detail' met processed data
       response.render('detail', {
         items: items.data
@@ -123,12 +147,13 @@ app.get('/detail/:id', function(request, response){
 })
 
 
-// - - - GET Route voor de family_page - - -
+// - - - - GET route voor de family pagina - - - -
 
 /* Binnen de routehandler app.get() worden twee asynchrone requests 
 gedaan met behulp van fetchJson om gegevens op te halen van twee 
 verschillende API-eindpunten: apiFamily en apiProfile. */
 app.get('/family_page', async function(request, response) {
+  const userId = request.params.id;
   // try...catch block, wordt gebruikt om fouten af te handelen die kunnen optreden binnen het try-blok.
   try {
     const families = await fetchJson(apiFamily);
@@ -139,7 +164,7 @@ app.get('/family_page', async function(request, response) {
     //console.log("API Response", families.data);
     //console.log("API Response", profiles.data);
   .data eigenschap van families en profiles objects wordt verder gebruikt 
-  bij rendering van index pagina. */
+  bij rendering van family pagina. */
     response.render('family_page', {
       families: families.data,
       profiles: profiles.data,

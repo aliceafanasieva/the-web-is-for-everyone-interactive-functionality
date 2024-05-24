@@ -1,12 +1,8 @@
-<%- include('./partials/head_ov_dt') %>
+<%- include('./partials/head', { userId: userId }) %>
 
 <main class="main-overview">
         <div class="welkom-message-template">
-            <% profiles.forEach(function(profile) { %>
-            <% if (profile.id === 2) { %>
-                <h1>Welkom <%= profile.name %> bij OBA!</h1>
-            <% } %>
-            <% }); %>
+        <h1>Welkom <%= user.name %> bij OBA!</h1>
             <p>
                 Ontdek een wereld vol kennis en verhalen. Hier vind je al jouw gegevens
                 zoals leningen en betalingen. Ook kan je hier nieuwe activiteiten ontdekken.
