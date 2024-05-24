@@ -7,6 +7,7 @@ import fetchJson from "./helpers/fetch-json.js";
 // Stel het basis endpoint in
 const apiUrl = "https://fdnd-agency.directus.app/items/"
 const apiProfile = (apiUrl + 'oba_profile')
+const apiFamily = (apiUrl + 'oba_family')
 const apiItem = (apiUrl + 'oba_item')
 
 // Maak een nieuwe express app aan
@@ -152,7 +153,7 @@ app.get('/detail/:id', function(request, response){
 /* Binnen de routehandler app.get() worden twee asynchrone requests 
 gedaan met behulp van fetchJson om gegevens op te halen van twee 
 verschillende API-eindpunten: apiFamily en apiProfile. */
-app.get('/family_page', async function(request, response) {
+app.get('/family_page/:id', async function(request, response) {
   const userId = request.params.id;
   // try...catch block, wordt gebruikt om fouten af te handelen die kunnen optreden binnen het try-blok.
   try {
@@ -160,14 +161,15 @@ app.get('/family_page', async function(request, response) {
     const profiles = await fetchJson(apiProfile);
 
   /* .data bevat gegevens die door de API worden geretourneerd.
-  console.log wordt gebruikt om raw fetched data te tonen in de terminal:
-    //console.log("API Response", families.data);
-    //console.log("API Response", profiles.data);
-  .data eigenschap van families en profiles objects wordt verder gebruikt 
+  console.log wordt gebruikt om raw fetched data te tonen in de terminal: */
+    console.log("API Response", families.data);
+    console.log("API Response", profiles.data);
+  /*.data eigenschap van families en profiles objects wordt verder gebruikt 
   bij rendering van family pagina. */
     response.render('family_page', {
       families: families.data,
       profiles: profiles.data,
+      userId: userId 
     });
   } catch (error) {
     console.error('Error fetching data:', error);
