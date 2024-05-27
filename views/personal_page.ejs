@@ -24,7 +24,7 @@
                     <% data.filter(item => item.item_type === 'book').forEach(book => { %>
                         <!-- Wanneer erop wordt geklikt, wordt user gestuurd naar 
                             een detail pagina van een specifiek item.-->
-                        <div class="carousel_item" onclick="window.location.href='./detail/<%= book.id %>'" draggable="false">
+                        <div class="carousel_item" onclick="window.location.href='/detail/<%= book.id %>?userId=<%= userId %>'" draggable="false">
                             <img src="https://fdnd-agency.directus.app/assets/<%= book.afbeelding %>" alt="<%= book.title %> Image">
                             <h3><%= book.title %></h3>
                         </div>
@@ -41,7 +41,7 @@
                 <i id="left" class="icon-arrow icon-arrow-left"></i>
                 <div class="carousel">
                     <% data.filter(item => item.item_type === 'cd').forEach(cd => { %>
-                        <div class="carousel_item" onclick="window.location.href='./detail/<%= cd.id %>'" draggable="false">
+                        <div class="carousel_item" onclick="window.location.href='/detail/<%= cd.id %>?userId=<%= userId %>'" draggable="false">
                             <img src="https://fdnd-agency.directus.app/assets/<%= cd.afbeelding %>" alt="<%= cd.title %> Image">
                             <h3><%= cd.title %></h3>
                         </div>
@@ -58,7 +58,7 @@
                 <i id="left" class="icon-arrow icon-arrow-left"></i>
                 <div class="carousel">
                     <% data.filter(item => item.item_type === 'activity').forEach(activity => { %>
-                        <div class="carousel_item" onclick="window.location.href='./detail/<%= activity.id %>'" draggable="false">
+                        <div class="carousel_item" onclick="window.location.href='/detail/<%= activity.id %>?userId=<%= userId %>'" draggable="false">
                             <img src="https://fdnd-agency.directus.app/assets/<%= activity.afbeelding %>" alt="<%= activity.title %> Image">
                             <h3><%= activity.title %></h3>
                         </div>

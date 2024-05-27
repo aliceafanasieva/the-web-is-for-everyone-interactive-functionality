@@ -1,4 +1,4 @@
-<%- include('./partials/head') %>
+<%- include('./partials/head', { userId: userId }) %>
 
 <main class="detail">
   <article>
@@ -13,7 +13,7 @@
       <p>taal: <%= item.language %></p>
       <p>kenmerken: <%= item.characteristics %></p>
       <p>ISBN: <%= item.ISBN %></p>
-      <p>editie: <%= item.editie %></p>
+      <p><b>editie:</b> <%= item.editie %></p>
       <p><b>genre:</b> <%= item.genre %></p>
       <p><b>samenvatting:</b> <%- item.description %></p>
     </div>

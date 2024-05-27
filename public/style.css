@@ -1,10 +1,9 @@
 :root {
   /* ===== Colors ===== */
-  --body-color: rgb(255, 255, 255);
-  --primary-color: rgb(255, 255, 255);
+  --background-color: rgb(255, 255, 255);
+  --primary-color: rgb(0, 0, 0);
   --secondary-color: rgb(255, 0, 0);
   --text-color: rgb(0, 0, 0);
-
 }
 
 /* - - - Basic styling - - - */
@@ -18,31 +17,13 @@
 
 body {
   min-height: 100vh;
-  background-color: var(--body-color);
+  background-color: var(--background-color);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
 main {
   padding-top: 2rem;
-}
-
-h1 {
-  font-size: 35px;
-}
-
-h2 {
-  font-size: 30px;
-}
-
-h3 {
-  font-size: 16px;
-  margin-top: 0.5em;
-}
-
-h1,
-h2 {
-  text-transform: uppercase;
 }
 
 h1,
@@ -53,11 +34,30 @@ p {
   font-weight: 400;
 }
 
+h1,
+h2 {
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+h3 {
+  font-size: 16px;
+  margin-top: 0.5em;
+}
+
+
 /* - - - Navigation bar head - - - */
 
 nav {
   position: sticky;
-  background-color: var(--primary-color);
+  background-color: var(--background-color);
   z-index: 1000;
   top: 0;
 }
@@ -76,8 +76,8 @@ nav .horbar {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--primary-color);
-  border-bottom: rgb(255, 0, 0) solid 1.2px;
+  background-color: var(--background-color);
+  border-bottom: var(--secondary-color) solid 1.2px;
 }
 
 nav .nav_option {
@@ -107,12 +107,11 @@ nav .nav_option:hover::after {
 }
 
 .sidebar {
-  border-right: rgb(255, 0, 0) solid 1.2px;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  width: 50%;
+  width: 100%;
   z-index: -10;
   background-color: rgba(255, 255, 255, 0.417);
   backdrop-filter: blur(12px);
@@ -129,7 +128,35 @@ nav .nav_option:hover::after {
   margin-left: 10px;
 }
 
+/* - - - Search form - - - */
 
+.search-form {
+  margin-left: auto;
+}
+
+.search-form input[type="text"] {
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  background: none;
+  padding: 5px;
+  color: var(--background-color);
+}
+
+.search-form button {
+  border: none;
+  background: none;
+  color: var(--background-color);
+  cursor: pointer;
+}
+
+/* - - - Navigation Media Queries - - - */ 
+
+@media (min-width: 45em) {
+  .sidebar {
+    width: 50%;
+    border-right: var(--secondary-color) solid 1.2px;
+  }
+}
 
 /* - - - Icons - - - */
 
@@ -148,31 +175,10 @@ nav .nav_option:hover::after {
   cursor: pointer;
 }
 
-/* - - - Search form - - - */
-
-.search-form {
-  margin-left: auto;
-}
-
-.search-form input[type="text"] {
-  border: none;
-  border-bottom: 1px solid var(--secondary-color);
-  background: none;
-  padding: 5px;
-  color: #fff;
-}
-
-.search-form button {
-  border: none;
-  background: none;
-  color: #fff;
-  cursor: pointer;
-}
-
 
 /* - - - Index.ejs - - - */
 
-.index {
+.family {
   width: 100%;
   height: 100%;
   display: flex;
@@ -182,16 +188,12 @@ nav .nav_option:hover::after {
   padding-top: 4rem;
 }
 
-.index h1 {
-  border-bottom: 1px solid black;
-}
-
 .container_family {
   padding-top: 2rem;
   text-align: center;
 }
 
-.index section {
+.family section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,13 +203,13 @@ nav .nav_option:hover::after {
   text-align: center;
 }
 
-.index section img {
+.family section img {
   width: 210px;
-  height: auto;
+  height: 210px;
   object-fit: cover;
 }
 
-.index section .cross {
+.family section .cross {
   width: 210px;
   height: 210px;
   display: flex;
@@ -215,7 +217,7 @@ nav .nav_option:hover::after {
   align-items: center;
 }
 
-.index section .cross img {
+.family section .cross img {
   width: 100px;
   height: 100px;
 }
@@ -223,16 +225,16 @@ nav .nav_option:hover::after {
 
 /* - - - Hover effect - - - */
 
-.index section:hover img, .index section:hover h3 {
+.family section:hover img, .family section:hover h3 {
   transform: scale(1.1);
   transition: 0.3s ease;
 }
 
-.index section:hover ~ .container {
+.family section:hover ~ .container {
   margin-top: 0; 
 }
 
-.index section:hover ~ h1 {
+.family section:hover ~ h1 {
   margin-top: -40px; 
 }
 
@@ -240,11 +242,10 @@ nav .nav_option:hover::after {
   text-transform: capitalize;
 }
 
-
 /* - - - index.ejs Media Queries - - - */ 
 
-@media (min-width: 45em) {
-  .index{
+@media (min-width: 35em) {
+  .family {
     display: flex;
     width: 100%;
     height: 100%;
@@ -259,38 +260,52 @@ nav .nav_option:hover::after {
     grid-template-rows: repeat(2, auto); 
     gap: 1em; 
     padding-top: 2em;
-    border-top: 1px solid black;
   }
 
-  .index section img {
+  .family section img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .family section .cross {
     width: 235px;
     height: 235px;
   }
 
-  .index section .cross {
-    width: 235px;
-    height: 235px;
-  }
-
-  .index section .cross img{
+  .family section .cross img{
     width: 120px;
     height: 120px;
   }
   
-  .index h1 {
+  .family h1 {
     margin-bottom: -0.2em;
     font-size: 45px;
     border: none;
   }
 
-  .index h3 {
+  .family h3 {
     margin-top: 1em;
+  }
+}
+
+@media (min-width: 40em) {
+  .family section img {
+    width: 235px;
+    height: 235px;
+  }
+}
+
+
+@media (min-width: 50em) {
+  .container_family {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 1em;
   }
 }
 
 
 @media (min-width: 70em) {
-
   .container_family {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, auto);
@@ -319,7 +334,7 @@ nav .nav_option:hover::after {
 
 .welkom-message-template p, 
 .welkom-message-template h1 {
-  color: red;
+  color: var(--secondary-color);
   text-transform: none;
 }
 
@@ -332,8 +347,8 @@ nav .nav_option:hover::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
 
 }
 
@@ -457,7 +472,7 @@ nav .nav_option:hover::after {
   font-size: 14px;
   white-space: nowrap;
   text-transform: uppercase;
-  background-color: black;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   cursor: pointer;
@@ -615,7 +630,38 @@ nav .nav_option:hover::after {
 
   .detail img {
     grid-area: image;
-    width: 25em;
+    width: 23em;
+    padding: 0 2em;
+  }
+
+  .item-info {
+    grid-area: info;
+    width: 1fr;
+    padding: 0 2em;
+  }
+}
+
+@media (min-width: 70em) {
+  .detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+  }
+  
+  .detail article {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    grid-template-areas: "image info";
+    width: 100%; 
+    max-width: 65em;
+    top: 5em;
+  }
+
+  .detail img {
+    grid-area: image;
+    width: 23em;
     padding: 0 2em;
   }
 

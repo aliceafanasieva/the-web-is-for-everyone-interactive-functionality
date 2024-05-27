@@ -127,26 +127,29 @@ app.get('/personal_page/:id', async function(request, response) {
 
 // Het :id is routeparameter in URL, die aangeeft dat het eindpunt 
 // een id-parameter in de URL verwacht.
-app.get('/detail/:id', function(request, response){
+app.get('/detail/:id', async function(request, response){
   // Functie request.params.id geeft de waarde van id terug. 
   // Het maakt een URL met een filterqueryparameter om alleen  
   // data van item met de specifieke ID op te halen.
   // Fetch data uit API gebasseerd op id parameter :
-  fetchJson(apiItem + '?filter={"id":' + request.params.id + '}')
-    .then((items) => {
-      // Preprocess data door onnodige <h2> en <strong> tags uit de description te verwijderen
-      items.data.forEach(item => {
-        if (item.description) {
-          item.description = item.description.replace(/<\/?h2[^>]*>/g, '').replace('Samenvatting', '');;
-        }
-      });
-      // Render 'detail' met processed data
-      response.render('detail', {
-        items: items.data
-      });
-  })
-})
-
+  const boekId = request.params.id;
+  const userId = request.query.userId;
+  try {
+    const items = await fetchJson(apiItem + `?filter={"id":${boekId}}`);
+    items.data.forEach(item => {
+      if (item.description) {
+        item.description = item.description.replace(/<\/?h2[^>]*>/g, '').replace('Samenvatting', '');
+      }
+    });
+    response.render('detail', {
+      items: items.data,
+      userId: userId
+    });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    response.status(500).send('Internal Server Error');
+  }
+});
 
 // - - - - GET route voor de family pagina - - - -
 
