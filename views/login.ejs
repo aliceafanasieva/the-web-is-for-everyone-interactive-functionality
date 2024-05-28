@@ -13,12 +13,21 @@
     <link rel="stylesheet" href="/style.css"> 
   </head>
 <body>
-    <div class="login-container">
-    <form action="/login" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <button type="submit">Login</button>
-    </form>
-    </div>
+  <div class="login-main-container">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="circle circle4"></div>
+    <main class="login-main">
+        <h1>Welkom bij oba</h1>
+        <h3>Log in om verder te gaan: </h3>
+        <section class="login-container">
+          <form action="/login" method="POST">
+              <input type="text" id="username" placeholder="Gebruikersnaam" name="username" required>
+              <button type="submit">Login</button>
+          </form>
+        </section>
+    </main>
+  </div>
 
 <%- include('./partials/foot') %>

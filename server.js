@@ -65,6 +65,7 @@ app.get('/profile/:id', async function(request, response) {
    Het maakt een URL met een filterqueryparameter om alleen  
    data van item met de specifieke ID op te halen. */
   const userId = request.params.id;
+  const currentPath = request.path;
   try {
     const profileResponse = await fetchJson(`${apiProfile}?filter={"id":${userId}}`);
     const user = profileResponse.data[0];
@@ -72,7 +73,8 @@ app.get('/profile/:id', async function(request, response) {
     if (user) {
       response.render('profile_page', {
         user: user,
-        userId: userId // Передаем userId
+        userId: userId, // Передаем userId
+        currentPath: currentPath
       });
     } else {
       response.status(404).send('User not found');
@@ -88,9 +90,11 @@ app.get('/profile/:id', async function(request, response) {
 
 app.get('/partials/head/:id', async function(request, response) {
   const userId = request.params.id;
+  const currentPath = request.path;
   try {
     response.render('head', {
-      userId: userId
+      userId: userId,
+      currentPath: currentPath
     });
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -108,13 +112,15 @@ app.get('/personal_page/:id', async function(request, response) {
   in de welkom bericht). */
   const profileResponse = await fetchJson(`${apiProfile}?filter={"id":${userId}}`);
   const user = profileResponse.data[0];
+  const currentPath = request.path;
   try {
     const items = await fetchJson(apiItem);
 
     response.render('personal_page', {
       data: items.data,
       user: user,
-      userId: userId 
+      userId: userId,
+      currentPath: currentPath
     });
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -134,6 +140,7 @@ app.get('/detail/:id', async function(request, response){
   // Fetch data uit API gebasseerd op id parameter :
   const boekId = request.params.id;
   const userId = request.query.userId;
+  const currentPath = request.path;
   try {
     const items = await fetchJson(apiItem + `?filter={"id":${boekId}}`);
     items.data.forEach(item => {
@@ -143,7 +150,8 @@ app.get('/detail/:id', async function(request, response){
     });
     response.render('detail', {
       items: items.data,
-      userId: userId
+      userId: userId,
+      currentPath: currentPath
     });
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -158,11 +166,11 @@ gedaan met behulp van fetchJson om gegevens op te halen van twee
 verschillende API-eindpunten: apiFamily en apiProfile. */
 app.get('/family_page/:id', async function(request, response) {
   const userId = request.params.id;
+  const currentPath = request.path;
   // try...catch block, wordt gebruikt om fouten af te handelen die kunnen optreden binnen het try-blok.
   try {
     const families = await fetchJson(apiFamily);
     const profiles = await fetchJson(apiProfile);
-
   /* .data bevat gegevens die door de API worden geretourneerd.
   console.log wordt gebruikt om raw fetched data te tonen in de terminal: */
     console.log("API Response", families.data);
@@ -172,7 +180,8 @@ app.get('/family_page/:id', async function(request, response) {
     response.render('family_page', {
       families: families.data,
       profiles: profiles.data,
-      userId: userId 
+      userId: userId,
+      currentPath: currentPath
     });
   } catch (error) {
     console.error('Error fetching data:', error);

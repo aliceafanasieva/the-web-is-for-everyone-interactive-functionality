@@ -20,15 +20,15 @@
         <li><i class='bx bx-x' id="x-icon" style="color: red;"></i></li>
         <form class="search-form" action="/search" method="GET">
         <input type="text" name="query" placeholder="Search...">
-        <button type="submit">Search</button>
+        <button class="search-button"type="submit">Search</button>
         </form>
         <a href="https://www.oba.nl/"><img src="/logo_oba.png" alt="Link to example.com" width="80" height="41"></a>
       </ul>
       <ul class="sidebar">
-        <li><a class="nav_option" href="/profile/<%= userId %>">Mijn profiel</a></li>
-        <li><a class="nav_option" href = "/personal_page/<%= userId %>">Persoonlijke pagina</a></li>
+        <li><a class="nav_option <%= currentPath === `/profile/${userId}` ? 'active' : '' %>" href="/profile/<%= userId %>">Mijn profiel</a></li>
+        <li><a class="nav_option <%= currentPath === `/personal_page/${userId}` ? 'active' : '' %>" href="/personal_page/<%= userId %>">Persoonlijke pagina</a></li>
         <li><a class="nav_option" href="#">Favoriten</a></li>
-        <li><a class="nav_option" href="/family_page/<%= userId %>">Mijn familie</a></li>
+        <li><a class="nav_option <%= currentPath === `/family_page/${userId}` ? 'active' : '' %>" href="/family_page/<%= userId %>">Mijn familie</a></li>
         <li><a class="nav_option" href="/">Log uit</a></li>
       </ul>
     </nav>

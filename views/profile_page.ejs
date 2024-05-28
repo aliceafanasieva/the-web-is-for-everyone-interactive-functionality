@@ -1,13 +1,14 @@
 <%- include('./partials/head', { userId: userId }) %>
 
-<h1>Profile Page</h1>
+<main>
+    <h1>Profile Page</h1>
 
-<p>Id: <%= user.id %></p>
-<p>Name: <%= user.name %></p>
-<img src="https://fdnd-agency.directus.app/assets/<%= user.avatar %>">
-<p>Subscription: <%= user.subscription %></p>
-<p>Address: <%= user.adress %></p>
-<p>City: <%= user.city %></p>
-<p>Postal Code: <%= user.postal_code %></p>
-<p>Phone Number: <%= user.phonenumber %></p>
-<p>Email: <%= user.email %></p>
+    <p>Name: <%= user.name %></p>
+    <img src="https://fdnd-agency.directus.app/assets/<%= user.avatar %>">
+    <p>Subscription: <%= user.subscription %></p>
+    <p>Address: <%= user.adress %></p>
+    <p>City: <%= user.city %></p>
+    <p>Postal Code: <%= user.postal_code %></p>
+    <p>Phone Number: <%= user.phonenumber %></p>
+    <p>Email: <%= user.email %></p>
+</main>
