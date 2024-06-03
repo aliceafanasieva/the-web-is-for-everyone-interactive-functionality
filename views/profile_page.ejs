@@ -1,10 +1,9 @@
 <%- include('./partials/head', { userId: userId }) %>
 
-<main>
+<main class="profile-main">
     <h1>Profile Page</h1>
-
-    <p>Name: <%= user.name %></p>
     <img src="https://fdnd-agency.directus.app/assets/<%= user.avatar %>">
+    <p>Name: <%= user.name %></p>
     <p>Subscription: <%= user.subscription %></p>
     <p>Address: <%= user.adress %></p>
     <p>City: <%= user.city %></p>

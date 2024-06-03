@@ -28,6 +28,8 @@ main {
   flex-direction: column;
 }
 
+/* - - - Typografie - - - */
+
 h1,
 h2,
 h3,
@@ -51,14 +53,44 @@ h2 {
 
 h3 {
   font-size: 16px;
-  margin-top: 0.5em;
 }
+
+p {
+  font-size: 16px;
+}
+
+@media (min-width: 45em){
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 70em) {
+  h1 {
+    font-size: 45px;
+  }
+
+  h2 {
+    font-size: 35px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+}
+
 
 label {
   display: block;
   display: none;
   margin-bottom: 0.5rem;
 }
+
+/* - - - Input - - - */
 
 input {
   margin-bottom: 1rem;
@@ -67,18 +99,66 @@ input {
   box-sizing: border-box;
   border: 1px solid transparent;
   border-bottom: 1px solid var(--primary-color);
+  background-color: transparent;
 }
 
 input:focus {
   outline: none;
   border: 1px solid transparent;
-  box-shadow: 0 0 0 1px rgb(255, 0, 0);
+  box-shadow: 0 0 0 1px var(--secondary-color);
 }
 
 input::placeholder{
   color: var(--primary-color);
   font-size: 15px;
   background-color: transparent;
+}
+
+input::selection {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    transition: background-color 5000s ease-in-out 0s;
+}
+ 
+
+/* - - - Search form - - - */
+
+.search-form {
+  margin-left: auto;
+  margin-right: 2rem;
+  width: 180px;
+  padding-top: 1rem;
+}
+
+.search-form input[type="text"] {
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  background: none;
+  padding: 5px;
+  color: var(--primary-color);
+}
+
+.search-form input:focus{
+  outline: none;
+  border-bottom: 1px solid var(--secondary-color);
+  box-shadow: none;
+}
+
+.search-form input::placeholder{
+  color: var(--secondary-color);
+  font-size: 14px;
+  background-color: transparent;
+}
+
+.search-form button {
+  display: none;
 }
 
 /* - - - Buttons - - - */
@@ -95,13 +175,13 @@ button {
   width: 150px;
   height: 40px;
   align-self: end;
-  transition: transform 0.2s ease; 
+  transition: all 0.s ease-in; 
 }
 
 button:hover {
   background-color: var(--primary-color);
   color: white;
-  border: none;
+  border: 1px solid transparent;
 }
 
 button:active {
@@ -130,12 +210,14 @@ button:active {
 } 
 
 #menu-icon {
-  font-size: 35px;
+  width: 2em;
+  height: 2em; 
   cursor: pointer;
 }
 
 #x-icon {
-  font-size: 40px;
+  width: 2em;
+  height: 2em; 
   display: none;
   cursor: pointer;
 }
@@ -220,24 +302,6 @@ nav .nav_option:hover::after {
   margin-left: 10px;
 }
 
-/* - - - Search form - - - */
-
-.search-form {
-  margin-left: auto;
-}
-
-.search-form input[type="text"] {
-  border: none;
-  border-bottom: 1px solid var(--secondary-color);
-  background: none;
-  padding: 5px;
-  color: var(--background-color);
-}
-
-.search-form button {
-  display: none;
-}
-
 /* - - - Navigation Media Queries - - - */ 
 
 @media (min-width: 45em) {
@@ -251,13 +315,13 @@ nav .nav_option:hover::after {
 /* - - - Login.ejs - - - */
 
 .login-main-container {
-  position: relative; /* Важно для позиционирования псевдоэлементов */
+  position: relative; 
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Чтобы скрыть части кругов, выходящие за пределы экрана */
+  overflow: hidden; 
 }
 
 .login-main-container::before,
@@ -270,16 +334,20 @@ nav .nav_option:hover::after {
 }
 
 .login-main {
+  max-width: 20rem;
   position: relative;
   text-align: center;
   background-color: #ffffff;
   padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 2; /* Поместить над размытыми кругами */
 }
 
 .login-container {
   margin-top: 3rem;
+}
+
+.login-container button {
+  width: 100%;
 }
 
 .circle {
@@ -289,43 +357,110 @@ nav .nav_option:hover::after {
   z-index: 1;
 }
 
-.circle1 {
-  width: 300px;
-  height: 300px;
-  top: -100px;
-  left: -100px;
-  background: rgba(189, 37, 37, 0.644);
-}
+@media (min-width: 35em) {
 
-.circle2 {
-  width: 400px;
-  height: 400px;
-  bottom: -150px;
-  right: -150px;
-  background: rgba(255, 0, 0, 0.776);
-}
+  .login-main{
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    max-width: 24rem;
+  }
 
-.circle3 {
-  width: 350px;
-  height: 350px;
-  top: -50px;
-  right: -100px;
-  background: rgba(255, 13, 45, 0.692);
-}
-
-.circle4 {
-  width: 250px;
-  height: 250px;
-  bottom: -100px;
-  left: -50px;
-  background: rgba(255, 55, 0, 0.749);
-}
-
-
-@media (min-width: 45em) {
+  .circle1 {
+    width: 300px;
+    height: 300px;
+    top: 400px;
+    right: 10px;
+    background: rgba(255, 0, 0, 0.89);
+  }
+  
+  .circle2 {
+    width: 250px;
+    height: 250px;
+    bottom: 200px;
+    left: 100px;
+    background: rgba(255, 0, 0, 0.804);
+  }
+  
+  .circle3 {
+    width: 200px;
+    height: 200px;
+    bottom: 150px;
+    right: 270px;
+    background: rgba(255, 13, 45, 0.777);
+  }
+  
+  .circle4 {
+    width: 200px;
+    height: 200px;
+    top: 300px;
+    left: 200px;
+    background: rgb(255 17 17);
+  }
 }
 
 @media (min-width: 70em) {
+  .circle1 {
+    width: 250px;
+    height: 250px;
+    top: 90px;
+    right: 250px;
+    background: rgb(255 0 0);
+  }
+  
+  .circle2 {
+    width: 300px;
+    height: 300px;
+    bottom: 90px;
+    left: 200px;
+    background: rgba(255, 0, 0, 0.776);
+  }
+  
+  .circle3 {
+    width: 250px;
+    height: 250px;
+    bottom: 200px;
+    right: 350px;
+    background: rgba(255, 13, 45, 0.692);
+  }
+  
+  .circle4 {
+    width: 200px;
+    height: 200px;
+    top: 200px;
+    left: 500px;
+    background: rgba(255, 27, 27, 0.824);
+  }
+}
+
+
+/* - - - profile_page.ejs - - - */
+
+.profile-main {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; 
+}
+
+.profile-main img {
+  max-width: 160px;
+  height: 160px;
+  object-fit: cover;
+}
+
+@media (min-width: 40em) {
+  .profile-main img {
+    max-width: 237px;
+    height: 237px;
+  }
+}
+
+@media (min-width: 70em) {
+  .profile-main img {
+    max-width: 285px;
+    height: 285px;
+  }
 }
 
 
@@ -348,10 +483,6 @@ nav .nav_option:hover::after {
   text-transform: none;
 }
 
-.welkom-message-template h1 {
-  font-size: 30px;
-}
-
 .title-container {
     width: 100%;
     display: flex;
@@ -370,7 +501,6 @@ nav .nav_option:hover::after {
 .title-container h2 {
   padding: 0.3em 1em;
   margin: 0;
-  font-size: 25px;
 }
 
 .title-container:nth-child(2) h2 {
@@ -447,6 +577,7 @@ nav .nav_option:hover::after {
 .carousel_item h3 {
   margin: 10px 0;
   white-space: wrap;
+  margin-top: 0.5em;
 }
 
 /* - - - Pijltjes carousel draaien - - - */ 
@@ -481,9 +612,6 @@ nav .nav_option:hover::after {
     padding: 4rem 4rem 5rem 4rem
   }
 
-  .welkom-message-template h1 {
-    font-size: 45px;
-  }
 
   .welkom-message-template p {
     width: 100%;
@@ -494,7 +622,6 @@ nav .nav_option:hover::after {
 
   .title-container h2 {
     padding: 0.3em 2em;
-    font-size: 30px;
   }
 
   .wrapper {
@@ -536,7 +663,6 @@ nav .nav_option:hover::after {
 
   .title-container h2 {
     padding: 0.3em 3em;
-    font-size: 35px;
   }
 
   .carousel_item {
@@ -573,6 +699,7 @@ nav .nav_option:hover::after {
 
 .item-info h3 {
   color: var(--text-color);
+  margin-top: 0.5em;
 }
 
 .item-info p {
@@ -745,12 +872,12 @@ nav .nav_option:hover::after {
   
   .family-main h1 {
     margin-bottom: -0.2em;
-    font-size: 45px;
     border: none;
   }
 
   .family-main h3 {
     margin-top: 1em;
+    margin-top: 0.5em;
   }
 }
 

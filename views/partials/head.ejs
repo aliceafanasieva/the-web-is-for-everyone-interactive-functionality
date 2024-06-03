@@ -16,8 +16,12 @@
     <!-- Navigation -->
     <nav class="navbar">
       <ul class="horbar">
-        <li><i class="bx bx-menu" id="menu-icon" style="color: red;"></i></li>
-        <li><i class='bx bx-x' id="x-icon" style="color: red;"></i></li>
+        <li><svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 21 21">
+          <path fill="none" stroke="#ff0000" stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.5h12m-12.002 4h11.997M4.5 14.5h11.995" />
+        </svg></li>
+        <li><svg id="x-icon" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+          <path fill="none" stroke="#ff0000" stroke-linecap="round" d="m6 6l12 12m0-12L6 18" />
+        </svg></li>
         <form class="search-form" action="/search" method="GET">
         <input type="text" name="query" placeholder="Search...">
         <button class="search-button"type="submit">Search</button>
